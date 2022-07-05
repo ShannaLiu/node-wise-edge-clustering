@@ -1,0 +1,26 @@
+Idea: Build the hierarchical structure based on 'homogeneity'
+       Node-wise searching strategy
+Define a score for each edge to represent the dissimilarity between the corresponding two nodes
+    - can be learned using a linear layer based on the embedding of two nodes xi | xj
+    - can use p-dimenional distance of the embeddings xi & xj
+
+Define cluster for each ndoe. Define an upper_bound.
+    For each node:
+        cluster = [the node]
+        cumulative_score = 0
+        while (cumulative_score):
+            potential_edges = search all the edges start from node in the cluster and end outside the cluster 
+            select_edge = select the edge that has smallest score 
+            cumulative_score += the score of the select_edge
+            add the node of the select_edge to the cluster   
+
+Delet repeated clusters.
+
+Select cluster.
+    Start from the cluster containing most nodes
+    while (selected_clusters haven't contained all nodes):
+        add_cluster = the cluster that contained most nodes that are not contained by selected cluster
+        add add_cluster to select cluster
+
+In next layer: two clusters are connected if they have common nodes.
+new embedding of the cluster = summation of all nodes embedding in the cluster * node score
